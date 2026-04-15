@@ -3,17 +3,19 @@ groups:
     rules:
 
       - alert: HighCPUUsage
-        expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 5
+        expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) >1
         for: 1s
         labels:
           severity: critical
         annotations:
-          summary: "High CPU Usage"
+          summary: "High CPU Usage detected on {{ $labels.instance }}"
+          description: "CPU usage is above 80%"
 
       - alert: HighMemoryUsage
-        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 5
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 >1
         for: 1s
         labels:
           severity: critical
         annotations:
-          summary: "High Memory Usage"
+          summary: "High Memory Usage detected on {{ $labels.instance }}"
+          description: "Memory usage is above 80%"

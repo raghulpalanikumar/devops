@@ -5,11 +5,21 @@ global:
   smtp_auth_password: 'gqktebnnjerrnmah'
   smtp_require_tls: true
 
+templates:
+  - '/etc/alertmanager/alertmanager_templates.tmpl'
+
 route:
   receiver: 'email-alert'
+  group_by: ['alertname', 'instance']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
 
 receivers:
   - name: 'email-alert'
     email_configs:
       - to: 'raghulpg2006@gmail.com'
         send_resolved: true
+        headers:
+          Subject: '{{ template "email.default.subject" . }}'
+        html: '{{ template "email.default.html" . }}'
