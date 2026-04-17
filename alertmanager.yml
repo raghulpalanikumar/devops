@@ -1,8 +1,8 @@
 global:
   smtp_smarthost: 'smtp.gmail.com:587'
-  smtp_from: 'raghulpg2006@gmail.com'
-  smtp_auth_username: 'raghulpg2006@gmail.com'
-  smtp_auth_password: 'gqktebnnjerrnmah'
+  smtp_from: ''
+  smtp_auth_username: ''
+  smtp_auth_password: ''
   smtp_require_tls: true
 
 templates:
